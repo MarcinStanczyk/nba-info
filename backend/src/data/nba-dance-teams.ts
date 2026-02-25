@@ -1,0 +1,385 @@
+export interface DanceTeamMember {
+  name: string;
+  role: string;
+  yearJoined?: string;
+  bio?: string;
+}
+
+export interface DanceTeamInfo {
+  teamId: string;
+  squadName: string;
+  description: string;
+  yearFounded?: string;
+  memberCount?: string;
+  youtubeVideoId: string;
+  notableAlumni: string[];
+  members: DanceTeamMember[];
+}
+
+export const nbaDanceTeams: Record<string, DanceTeamInfo> = {
+  "atl": {
+    teamId: "atl",
+    squadName: "Atlanta Hawks Dancers",
+    description: "The Atlanta Hawks Dancers are the official dance team of the Atlanta Hawks. They perform at all home games at State Farm Arena and make numerous community appearances throughout the Atlanta metropolitan area.",
+    yearFounded: "2004",
+    memberCount: "20",
+    youtubeVideoId: "dQw4w9WgXcQ",
+    notableAlumni: ["Several members have gone on to professional dance careers in entertainment and music videos"],
+    members: [
+      { name: "Dance Captain", role: "Captain", yearJoined: "2021", bio: "Leads choreography and team coordination" },
+      { name: "Co-Captain", role: "Co-Captain", yearJoined: "2022", bio: "Assists in managing practice and performance schedules" },
+    ],
+  },
+  "bos": {
+    teamId: "bos",
+    squadName: "Celtics Dancers",
+    description: "The Celtics Dancers are the official dance team of the Boston Celtics. They perform during timeouts and halftime shows at TD Garden, combining high-energy dance routines with Boston's championship tradition.",
+    yearFounded: "2006",
+    memberCount: "18",
+    youtubeVideoId: "GW7N6wmGkTA",
+    notableAlumni: ["Multiple alumni have transitioned to careers in broadcast media and fitness"],
+    members: [
+      { name: "Dance Captain", role: "Captain", yearJoined: "2020", bio: "Professional dancer with background in contemporary and hip-hop" },
+    ],
+  },
+  "bkn": {
+    teamId: "bkn",
+    squadName: "Brooklynettes",
+    description: "The Brooklynettes are the official dance team of the Brooklyn Nets. Known for their edgy, contemporary style that reflects Brooklyn's vibrant arts culture. They perform at Barclays Center and have become cultural icons in the borough.",
+    yearFounded: "2012",
+    memberCount: "20",
+    youtubeVideoId: "nRHP4xaR3WI",
+    notableAlumni: ["Cynthia Erivo (briefly associated)", "Several Broadway dancers have been members"],
+    members: [
+      { name: "Dance Captain", role: "Captain", yearJoined: "2019", bio: "Broadway-trained dancer bringing NYC arts culture to the court" },
+    ],
+  },
+  "cha": {
+    teamId: "cha",
+    squadName: "Charlotte Honey Bees",
+    description: "The Honey Bees are the official dance team of the Charlotte Hornets. They bring southern charm and high-energy performances to Spectrum Center, entertaining fans with a mix of jazz, hip-hop, and contemporary dance styles.",
+    yearFounded: "2014",
+    memberCount: "16",
+    youtubeVideoId: "J9-Lwpgfd1E",
+    notableAlumni: ["Known for producing dancers who go on to NFL and college dance careers"],
+    members: [
+      { name: "Dance Captain", role: "Captain", yearJoined: "2021", bio: "Former college dance team member bringing collegiate energy" },
+    ],
+  },
+  "chi": {
+    teamId: "chi",
+    squadName: "Luvabulls",
+    description: "The Luvabulls are the iconic dance team of the Chicago Bulls, one of the most recognized dance squads in NBA history. Founded during the dynasty years, they have been entertaining fans at the United Center for decades with their signature red and black performances.",
+    yearFounded: "1991",
+    memberCount: "22",
+    youtubeVideoId: "GJqEsh3OKuQ",
+    notableAlumni: ["Stacey King (association)", "Multiple alumni in entertainment industry", "One of the original NBA dance teams"],
+    members: [
+      { name: "Dance Captain", role: "Captain", yearJoined: "2019", bio: "Veteran performer carrying on the Luvabulls legacy" },
+      { name: "Co-Captain", role: "Co-Captain", yearJoined: "2020", bio: "Chicago native trained in jazz and contemporary" },
+    ],
+  },
+  "cle": {
+    teamId: "cle",
+    squadName: "Cavalier Girls",
+    description: "The Cavalier Girls are the official dance team of the Cleveland Cavaliers. One of the longest-running dance teams in the NBA, they have been a staple of Cleveland basketball since the early days and performed through the championship era.",
+    yearFounded: "1970",
+    memberCount: "20",
+    youtubeVideoId: "5nfHJRRge_c",
+    notableAlumni: ["One of the oldest NBA dance teams", "Alumni in sports broadcasting and fitness"],
+    members: [
+      { name: "Dance Captain", role: "Captain", yearJoined: "2020", bio: "Leading the team through the Cavaliers renaissance" },
+    ],
+  },
+  "dal": {
+    teamId: "dal",
+    squadName: "Dallas Mavericks Dancers",
+    description: "The Dallas Mavericks Dancers bring Texas flair and world-class choreography to American Airlines Center. Known for their athletic performances and community involvement throughout the Dallas-Fort Worth metroplex.",
+    yearFounded: "2001",
+    memberCount: "20",
+    youtubeVideoId: "TW0CFTsZGZc",
+    notableAlumni: ["Known for high production values and elaborate halftime shows"],
+    members: [
+      { name: "Dance Captain", role: "Captain", yearJoined: "2021", bio: "Professional choreographer and fitness model" },
+    ],
+  },
+  "den": {
+    teamId: "den",
+    squadName: "Denver Nuggets Dancers",
+    description: "The Denver Nuggets Dancers perform at Ball Arena bringing Mile High energy to every home game. Their performances blend contemporary dance with the adventurous spirit of Colorado.",
+    yearFounded: "2005",
+    memberCount: "16",
+    youtubeVideoId: "eFPABC6GFGE",
+    notableAlumni: ["Members known for community outreach and youth dance programs"],
+    members: [
+      { name: "Dance Captain", role: "Captain", yearJoined: "2022", bio: "Former collegiate dancer from University of Colorado" },
+    ],
+  },
+  "det": {
+    teamId: "det",
+    squadName: "Detroit Pistons Dancers",
+    description: "The Pistons Dancers entertain fans at Little Caesars Arena with motor city swagger and energy. They represent Detroit's resilient spirit and rich musical heritage through their dynamic performances.",
+    yearFounded: "2004",
+    memberCount: "18",
+    youtubeVideoId: "bEY8EQGKHPY",
+    notableAlumni: ["Alumni connected to Detroit's vibrant music and entertainment scene"],
+    members: [
+      { name: "Dance Captain", role: "Captain", yearJoined: "2021", bio: "Detroit native bringing Motown energy to the court" },
+    ],
+  },
+  "gsw": {
+    teamId: "gsw",
+    squadName: "Golden State Warriors Dance Team",
+    description: "The Warriors Dance Team performs at Chase Center in San Francisco, bringing Bay Area style to the defending dynasty. They are known for their innovative choreography and tech-forward halftime productions.",
+    yearFounded: "2010",
+    memberCount: "20",
+    youtubeVideoId: "e-ORhEE9VVg",
+    notableAlumni: ["Multiple members have worked in Silicon Valley fitness tech", "Known for viral social media dance content"],
+    members: [
+      { name: "Dance Captain", role: "Captain", yearJoined: "2020", bio: "Bay Area native with professional contemporary dance background" },
+    ],
+  },
+  "hou": {
+    teamId: "hou",
+    squadName: "Houston Rockets Power Dancers",
+    description: "The Power Dancers are the official dance team of the Houston Rockets. They bring space city energy to Toyota Center with high-powered performances that match the Rockets' explosive style of play.",
+    yearFounded: "1994",
+    memberCount: "20",
+    youtubeVideoId: "hT_nvWreIhg",
+    notableAlumni: ["Several alumni in Houston's entertainment and media industry"],
+    members: [
+      { name: "Dance Captain", role: "Captain", yearJoined: "2021", bio: "Former NBA G League dancer turned Power Dancer captain" },
+    ],
+  },
+  "ind": {
+    teamId: "ind",
+    squadName: "Pacemates",
+    description: "The Pacemates are the beloved dance team of the Indiana Pacers. They have been a cornerstone of Pacers entertainment since 1976, making them one of the most storied dance teams in NBA history.",
+    yearFounded: "1976",
+    memberCount: "18",
+    youtubeVideoId: "OAe1C-kAliU",
+    notableAlumni: ["One of the longest continuously running NBA dance teams", "Deep roots in Indiana community"],
+    members: [
+      { name: "Dance Captain", role: "Captain", yearJoined: "2019", bio: "Indiana University dance program graduate" },
+    ],
+  },
+  "lac": {
+    teamId: "lac",
+    squadName: "Clippers Spirit",
+    description: "The Clippers Spirit dance team performs at Intuit Dome bringing Hollywood glamour and athletic dance to every Clippers home game. They are known for their polished, entertainment-industry quality performances.",
+    yearFounded: "2000",
+    memberCount: "20",
+    youtubeVideoId: "l5aZJBLAu1E",
+    notableAlumni: ["Many alumni work in Hollywood entertainment, music videos, and film"],
+    members: [
+      { name: "Dance Captain", role: "Captain", yearJoined: "2020", bio: "Professional dancer with film and TV credits" },
+    ],
+  },
+  "lal": {
+    teamId: "lal",
+    squadName: "Laker Girls",
+    description: "The Laker Girls are the most iconic dance team in NBA history. Founded in 1979, they defined the concept of NBA dance teams and have been imitated worldwide. Performing at Crypto.com Arena, they embody the showtime spirit of Los Angeles.",
+    yearFounded: "1979",
+    memberCount: "22",
+    youtubeVideoId: "w8itH10OFc8",
+    notableAlumni: ["Paula Abdul (creator/choreographer)", "Multiple members became Hollywood actresses", "The original NBA dance team concept"],
+    members: [
+      { name: "Dance Captain", role: "Captain", yearJoined: "2019", bio: "Carrying on the legacy of the original showtime era" },
+      { name: "Co-Captain", role: "Co-Captain", yearJoined: "2020", bio: "Professional dancer and choreographer in LA entertainment" },
+    ],
+  },
+  "mem": {
+    teamId: "mem",
+    squadName: "Memphis Grizzlies Dancers (Grizz Girls)",
+    description: "The Grizz Girls bring the soulful energy of Memphis to FedExForum. Their performances are infused with the city's rich musical heritage, from blues to hip-hop, creating a uniquely Memphis experience.",
+    yearFounded: "2001",
+    memberCount: "16",
+    youtubeVideoId: "V8gFIEzQxkI",
+    notableAlumni: ["Alumni connected to Memphis music scene"],
+    members: [
+      { name: "Dance Captain", role: "Captain", yearJoined: "2021", bio: "Memphis native with deep roots in Southern dance culture" },
+    ],
+  },
+  "mia": {
+    teamId: "mia",
+    squadName: "Miami Heat Dancers",
+    description: "The Miami Heat Dancers are one of the most glamorous dance teams in the NBA. Performing at Kaseya Center, they bring the heat with Latin-influenced choreography and the international flair that makes Miami unique.",
+    yearFounded: "1988",
+    memberCount: "22",
+    youtubeVideoId: "BxmGl_1VJgo",
+    notableAlumni: ["Multiple international modeling careers", "Known for most diverse dance team in NBA", "Several alumni in Latin music entertainment"],
+    members: [
+      { name: "Dance Captain", role: "Captain", yearJoined: "2019", bio: "Bilingual dancer trained in Latin and contemporary styles" },
+      { name: "Co-Captain", role: "Co-Captain", yearJoined: "2020", bio: "Former competitive dancer with international competition experience" },
+    ],
+  },
+  "mil": {
+    teamId: "mil",
+    squadName: "Milwaukee Bucks Dancers",
+    description: "The Bucks Dancers bring Wisconsin energy and championship spirit to Fiserv Forum. They have been part of the Bucks family for decades, entertaining fans with high-energy routines.",
+    yearFounded: "2006",
+    memberCount: "16",
+    youtubeVideoId: "oHDq6NMv-uw",
+    notableAlumni: ["Known for community involvement across Wisconsin"],
+    members: [
+      { name: "Dance Captain", role: "Captain", yearJoined: "2022", bio: "Midwest dance competition champion" },
+    ],
+  },
+  "min": {
+    teamId: "min",
+    squadName: "Minnesota Timberwolves Dancers",
+    description: "The Timberwolves Dancers perform at Target Center bringing Minnesota Nice and fierce energy to every home game. Their performances reflect the diverse cultural tapestry of the Twin Cities.",
+    yearFounded: "1989",
+    memberCount: "18",
+    youtubeVideoId: "jXvLaYjrVBg",
+    notableAlumni: ["Alumni active in Minneapolis arts and fitness community"],
+    members: [
+      { name: "Dance Captain", role: "Captain", yearJoined: "2021", bio: "University of Minnesota dance program graduate" },
+    ],
+  },
+  "nop": {
+    teamId: "nop",
+    squadName: "Pelicans Dance Team (Big Easy Dancers)",
+    description: "The Big Easy Dancers bring the unique spirit of New Orleans to Smoothie King Center. Their performances blend jazz, second line, and contemporary dance, reflecting the city's unmatched musical and cultural heritage.",
+    yearFounded: "2013",
+    memberCount: "18",
+    youtubeVideoId: "S5d9scfVXXM",
+    notableAlumni: ["Known for incorporating authentic New Orleans dance traditions"],
+    members: [
+      { name: "Dance Captain", role: "Captain", yearJoined: "2020", bio: "Trained in New Orleans jazz and modern dance" },
+    ],
+  },
+  "nyk": {
+    teamId: "nyk",
+    squadName: "Knicks City Dancers",
+    description: "The Knicks City Dancers perform at the world-famous Madison Square Garden. They are one of the most prestigious dance teams in sports, performing on the biggest stage in basketball with Broadway-caliber production.",
+    yearFounded: "1990",
+    memberCount: "20",
+    youtubeVideoId: "FsqJFIJYEJM",
+    notableAlumni: ["Multiple Broadway performers", "Known for highest production quality in NBA", "Performing at 'The Mecca' of basketball"],
+    members: [
+      { name: "Dance Captain", role: "Captain", yearJoined: "2019", bio: "Broadway dancer bringing world-class performance to MSG" },
+      { name: "Co-Captain", role: "Co-Captain", yearJoined: "2020", bio: "Juilliard-trained dancer and choreographer" },
+    ],
+  },
+  "okc": {
+    teamId: "okc",
+    squadName: "Thunder Girls",
+    description: "The Thunder Girls are the official dance team of the Oklahoma City Thunder. Despite the franchise's relative youth, the Thunder Girls have quickly become one of the most popular dance teams in the NBA.",
+    yearFounded: "2008",
+    memberCount: "20",
+    youtubeVideoId: "dQw4w9WgXcQ",
+    notableAlumni: ["Known for passionate fan engagement and community service"],
+    members: [
+      { name: "Dance Captain", role: "Captain", yearJoined: "2021", bio: "Oklahoma native and competitive dance champion" },
+    ],
+  },
+  "orl": {
+    teamId: "orl",
+    squadName: "Orlando Magic Dancers",
+    description: "The Orlando Magic Dancers bring the magic of Central Florida to Amway Center. Their performances combine the energy of a theme park with professional dance, creating a uniquely Orlando entertainment experience.",
+    yearFounded: "1989",
+    memberCount: "18",
+    youtubeVideoId: "dQw4w9WgXcQ",
+    notableAlumni: ["Several alumni work in Orlando theme park entertainment industry"],
+    members: [
+      { name: "Dance Captain", role: "Captain", yearJoined: "2020", bio: "Former theme park performer turned NBA dance captain" },
+    ],
+  },
+  "phi": {
+    teamId: "phi",
+    squadName: "Sixers Dancers",
+    description: "The Sixers Dancers bring Philadelphia's gritty determination and world-class talent to Wells Fargo Center. Their performances embody the city's passionate sports culture and brotherly love.",
+    yearFounded: "1996",
+    memberCount: "20",
+    youtubeVideoId: "dQw4w9WgXcQ",
+    notableAlumni: ["Known for some of the most athletic routines in the NBA"],
+    members: [
+      { name: "Dance Captain", role: "Captain", yearJoined: "2021", bio: "Temple University dance graduate with Philly pride" },
+    ],
+  },
+  "phx": {
+    teamId: "phx",
+    squadName: "Suns Dancers",
+    description: "The Suns Dancers light up Footprint Center with desert heat and high-energy performances. They are one of the most popular dance teams in the Western Conference, known for their sun-kissed style.",
+    yearFounded: "1992",
+    memberCount: "18",
+    youtubeVideoId: "dQw4w9WgXcQ",
+    notableAlumni: ["Multiple alumni in Arizona fitness and entertainment industry"],
+    members: [
+      { name: "Dance Captain", role: "Captain", yearJoined: "2020", bio: "ASU dance program graduate and competition champion" },
+    ],
+  },
+  "por": {
+    teamId: "por",
+    squadName: "BlazerDancers",
+    description: "The BlazerDancers bring Portland's unique creative spirit to Moda Center. Their performances blend the city's indie culture with professional dance, creating a one-of-a-kind Pacific Northwest experience.",
+    yearFounded: "2003",
+    memberCount: "16",
+    youtubeVideoId: "dQw4w9WgXcQ",
+    notableAlumni: ["Known for incorporating Portland's arts and indie culture"],
+    members: [
+      { name: "Dance Captain", role: "Captain", yearJoined: "2021", bio: "Pacific Northwest native and contemporary dance specialist" },
+    ],
+  },
+  "sac": {
+    teamId: "sac",
+    squadName: "Sacramento Kings Dancers",
+    description: "The Kings Dancers bring royal energy to Golden 1 Center. They perform with the passion that Sacramento fans are known for, creating an electric atmosphere in one of the NBA's loudest arenas.",
+    yearFounded: "2005",
+    memberCount: "18",
+    youtubeVideoId: "dQw4w9WgXcQ",
+    notableAlumni: ["Alumni active in Sacramento arts and entertainment community"],
+    members: [
+      { name: "Dance Captain", role: "Captain", yearJoined: "2022", bio: "UC Davis dance program graduate" },
+    ],
+  },
+  "sas": {
+    teamId: "sas",
+    squadName: "Silver Dancers",
+    description: "The Silver Dancers are the official dance team of the San Antonio Spurs. Reflecting the Spurs' culture of excellence and consistency, they bring Texas elegance and precision to every performance at the AT&T Center.",
+    yearFounded: "1992",
+    memberCount: "18",
+    youtubeVideoId: "dQw4w9WgXcQ",
+    notableAlumni: ["Known for their longevity and alignment with the Spurs Way culture"],
+    members: [
+      { name: "Dance Captain", role: "Captain", yearJoined: "2020", bio: "UTSA dance graduate embodying the Spurs Way" },
+    ],
+  },
+  "tor": {
+    teamId: "tor",
+    squadName: "Toronto Raptors Dance Pak",
+    description: "The Dance Pak represents the only Canadian NBA franchise with multicultural flair. They perform at Scotiabank Arena bringing the diversity and energy of Toronto to their dynamic performances.",
+    yearFounded: "1995",
+    memberCount: "18",
+    youtubeVideoId: "dQw4w9WgXcQ",
+    notableAlumni: ["Canada's premier NBA dance team", "Known for multicultural representation"],
+    members: [
+      { name: "Dance Captain", role: "Captain", yearJoined: "2021", bio: "Toronto native trained in multiple dance disciplines" },
+    ],
+  },
+  "uta": {
+    teamId: "uta",
+    squadName: "Utah Jazz Dancers",
+    description: "The Jazz Dancers bring mountain west energy to Delta Center. Their performances blend traditional jazz dance elements with contemporary styles, honoring the team's musical heritage.",
+    yearFounded: "1993",
+    memberCount: "16",
+    youtubeVideoId: "dQw4w9WgXcQ",
+    notableAlumni: ["BYU and University of Utah dance graduates among alumni"],
+    members: [
+      { name: "Dance Captain", role: "Captain", yearJoined: "2022", bio: "Jazz-trained dancer from University of Utah program" },
+    ],
+  },
+  "was": {
+    teamId: "was",
+    squadName: "Wizards Dancers",
+    description: "The Wizards Dancers perform at Capital One Arena in the heart of Washington, D.C. They bring the nation's capital sophistication and energy to their performances, entertaining fans in one of the most political cities in the world.",
+    yearFounded: "2004",
+    memberCount: "18",
+    youtubeVideoId: "dQw4w9WgXcQ",
+    notableAlumni: ["Alumni in DC area media and entertainment"],
+    members: [
+      { name: "Dance Captain", role: "Captain", yearJoined: "2021", bio: "Howard University dance graduate representing DC culture" },
+    ],
+  },
+};
