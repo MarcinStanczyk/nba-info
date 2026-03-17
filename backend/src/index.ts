@@ -1,13 +1,5 @@
-// NestJS Backend - Main barrel export
-// This is the entry point for all backend modules
-// In full NestJS, this would be app.module.ts with @Module decorator
-//
-// Migration guide to standalone NestJS:
-// 1. Install @nestjs/core, @nestjs/common, @nestjs/platform-express
-// 2. Add decorators: @Injectable(), @Controller(), @Get(), @Param(), etc.
-// 3. Create app.module.ts with @Module({ imports: [TeamsModule, StandingsModule, StatesModule] })
-// 4. Create main.ts with NestFactory.create(AppModule)
-// 5. Remove Next.js API proxy routes
+// Backend domain barrel exports
+// NestJS bootstrap lives in src/main.ts and src/app.module.ts
 
 // Modules
 export * from "./teams";
