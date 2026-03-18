@@ -32,6 +32,9 @@ jobs:
 
           echo "AZURE_STATIC_WEB_APPS_API_TOKEN is present (length: ${#SWA_TOKEN})"
 
+          TOKEN_FINGERPRINT=$(printf '%s' "$SWA_TOKEN" | sha256sum | cut -c1-12)
+          echo "SWA token fingerprint (sha256, first 12): $TOKEN_FINGERPRINT"
+
           if [ -z "$NEXT_PUBLIC_BACKEND_URL" ]; then
             echo "NEXT_PUBLIC_BACKEND_URL is not set (secret or repository variable)."
             echo "Proceeding with app default. Set it if you need a non-default backend URL."
