@@ -57,7 +57,7 @@ Uruchamia się na push do `master` tylko przy zmianach w `backend/**`.
 Wymagane ustawienia w GitHub:
 
 - secret: `AZURE_WEBAPP_PUBLISH_PROFILE_BACKEND`
-- variable: `AZURE_BACKEND_WEBAPP_NAME` (wymagane; dokładna nazwa App Service, np. `nba-info-gkebftgnhhcthxe7`)
+- variable: `AZURE_BACKEND_WEBAPP_NAME` (opcjonalne; jeśli brak, workflow użyje `nba-info-gkebftgnhhcthxe7`)
 
 Wymagane ustawienia App Service:
 

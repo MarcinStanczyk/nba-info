@@ -53,15 +53,6 @@ jobs:
     needs: build
 
     steps:
-      - name: Validate backend app name variable
-        env:
-          BACKEND_APP_NAME: ${{ vars.AZURE_BACKEND_WEBAPP_NAME }}
-        run: |
-          if [ -z "$BACKEND_APP_NAME" ]; then
-            echo "Missing repository variable: AZURE_BACKEND_WEBAPP_NAME"
-            exit 1
-          fi
-
       - name: Download backend artifact
         uses: actions/download-artifact@v4
         with:
@@ -71,6 +62,6 @@ jobs:
       - name: Deploy backend to Azure App Service
         uses: azure/webapps-deploy@v3
         with:
-          app-name: ${{ vars.AZURE_BACKEND_WEBAPP_NAME }}
+          app-name: ${{ vars.AZURE_BACKEND_WEBAPP_NAME || 'nba-info-gkebftgnhhcthxe7' }}
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE_BACKEND }}
           package: backend-package/backend-deploy
