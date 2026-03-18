@@ -4,93 +4,23 @@ on:
   push:
     branches:
       - master
-  pull_request:
-    types: [opened, synchronize, reopened, closed]
-    branches:
-      - master
 
 jobs:
   build_and_deploy_job:
-    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
     runs-on: ubuntu-latest
     name: Build and Deploy Job
     steps:
       - uses: actions/checkout@v4
-
-      - name: Prepare SWA token
-        id: prepare_swa_token
-        env:
-          RAW_SWA_TOKEN: ${{ secrets.WEB_APPS_API_TOKEN }}
-        run: |
-          # Remove hidden newline characters and trim surrounding spaces.
-          CLEAN_SWA_TOKEN=$(printf '%s' "$RAW_SWA_TOKEN" | tr -d '\r\n' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
-
-          if [ -z "$CLEAN_SWA_TOKEN" ]; then
-            echo "Missing or empty secret after cleanup: WEB_APPS_API_TOKEN"
-            exit 1
-          fi
-
-          echo "swa_token=$CLEAN_SWA_TOKEN" >> "$GITHUB_OUTPUT"
-
-      - name: Validate required secrets
-        env:
-          SWA_TOKEN: ${{ steps.prepare_swa_token.outputs.swa_token }}
-          NEXT_PUBLIC_BACKEND_URL: ${{ secrets.NEXT_PUBLIC_BACKEND_URL || vars.NEXT_PUBLIC_BACKEND_URL }}
-        run: |
-          echo "Repository: $GITHUB_REPOSITORY"
-          echo "Ref: $GITHUB_REF"
-
-          if [ -z "$SWA_TOKEN" ]; then
-            echo "Missing secret: WEB_APPS_API_TOKEN"
-            exit 1
-          fi
-
-          echo "WEB_APPS_API_TOKEN is present (length: ${#SWA_TOKEN})"
-
-          TOKEN_FINGERPRINT=$(printf '%s' "$SWA_TOKEN" | sha256sum | cut -c1-12)
-          echo "SWA token fingerprint (sha256, first 12): $TOKEN_FINGERPRINT"
-
-          if [ -z "$NEXT_PUBLIC_BACKEND_URL" ]; then
-            echo "NEXT_PUBLIC_BACKEND_URL is not set (secret or repository variable)."
-            echo "Proceeding with app default. Set it if you need a non-default backend URL."
-          else
-            echo "NEXT_PUBLIC_BACKEND_URL is present"
-          fi
 
       - name: Build and Deploy
         env:
           NEXT_PUBLIC_BACKEND_URL: ${{ secrets.NEXT_PUBLIC_BACKEND_URL || vars.NEXT_PUBLIC_BACKEND_URL }}
         uses: Azure/static-web-apps-deploy@v1
         with:
-          azure_static_web_apps_api_token: ${{ steps.prepare_swa_token.outputs.swa_token }}
+          azure_static_web_apps_api_token: ${{ secrets.WEB_APPS_API_TOKEN }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: upload
           app_location: "frontend"
           api_location: ""
           app_build_command: "npm ci && npm run build && test -d out"
           output_location: "out"
-
-  close_pull_request_job:
-    if: github.event_name == 'pull_request' && github.event.action == 'closed'
-    runs-on: ubuntu-latest
-    name: Close Pull Request Job
-    steps:
-      - name: Prepare SWA token
-        id: prepare_swa_token
-        env:
-          RAW_SWA_TOKEN: ${{ secrets.WEB_APPS_API_TOKEN }}
-        run: |
-          CLEAN_SWA_TOKEN=$(printf '%s' "$RAW_SWA_TOKEN" | tr -d '\r\n' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
-
-          if [ -z "$CLEAN_SWA_TOKEN" ]; then
-            echo "Missing or empty secret after cleanup: WEB_APPS_API_TOKEN"
-            exit 1
-          fi
-
-          echo "swa_token=$CLEAN_SWA_TOKEN" >> "$GITHUB_OUTPUT"
-
-      - name: Close Pull Request
-        uses: Azure/static-web-apps-deploy@v1
-        with:
-          azure_static_web_apps_api_token: ${{ steps.prepare_swa_token.outputs.swa_token }}
-          action: close
