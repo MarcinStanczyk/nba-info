@@ -17,6 +17,28 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Validate required secrets
+        env:
+          SWA_TOKEN: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+          NEXT_PUBLIC_BACKEND_URL: ${{ secrets.NEXT_PUBLIC_BACKEND_URL }}
+        run: |
+          echo "Repository: $GITHUB_REPOSITORY"
+          echo "Ref: $GITHUB_REF"
+
+          if [ -z "$SWA_TOKEN" ]; then
+            echo "Missing secret: AZURE_STATIC_WEB_APPS_API_TOKEN"
+            exit 1
+          fi
+
+          echo "AZURE_STATIC_WEB_APPS_API_TOKEN is present (length: ${#SWA_TOKEN})"
+
+          if [ -z "$NEXT_PUBLIC_BACKEND_URL" ]; then
+            echo "Missing secret: NEXT_PUBLIC_BACKEND_URL"
+            exit 1
+          fi
+
+          echo "NEXT_PUBLIC_BACKEND_URL is present"
+
       - name: Build and Deploy
         env:
           NEXT_PUBLIC_BACKEND_URL: ${{ secrets.NEXT_PUBLIC_BACKEND_URL }}

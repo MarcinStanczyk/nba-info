@@ -10,19 +10,3 @@ services:
     ports:
       - "4000:4000"
     restart: unless-stopped
-
-  frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    container_name: nba-frontend
-    environment:
-      - PORT=3000
-      - NODE_ENV=production
-      - BACKEND_URL=http://backend:4000
-      - NEXT_PUBLIC_BACKEND_URL=http://localhost:4000
-    depends_on:
-      - backend
-    ports:
-      - "3000:3000"
-    restart: unless-stopped
