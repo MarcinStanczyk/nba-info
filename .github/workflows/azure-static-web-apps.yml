@@ -67,7 +67,7 @@ jobs:
           action: upload
           app_location: "frontend"
           api_location: ""
-          app_build_command: "npm run build"
+          app_build_command: "npm ci && npm run build && test -d out"
           output_location: "out"
 
   close_pull_request_job:
