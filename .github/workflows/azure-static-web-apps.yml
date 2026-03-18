@@ -12,6 +12,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Debug token fingerprint (safe)
+        run: |
+          TOKEN="${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}"
+          echo "Token length: ${#TOKEN}"
+          echo -n "$TOKEN" | sha256sum | cut -c1-16
+
       - name: Build and Deploy
         env:
           NEXT_PUBLIC_BACKEND_URL: ${{ secrets.NEXT_PUBLIC_BACKEND_URL || vars.NEXT_PUBLIC_BACKEND_URL }}
