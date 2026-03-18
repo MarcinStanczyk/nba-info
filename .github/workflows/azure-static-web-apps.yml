@@ -20,13 +20,13 @@ jobs:
       - name: Prepare SWA token
         id: prepare_swa_token
         env:
-          RAW_SWA_TOKEN: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+          RAW_SWA_TOKEN: ${{ secrets.WEB_APPS_API_TOKEN }}
         run: |
           # Remove hidden newline characters and trim surrounding spaces.
           CLEAN_SWA_TOKEN=$(printf '%s' "$RAW_SWA_TOKEN" | tr -d '\r\n' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
 
           if [ -z "$CLEAN_SWA_TOKEN" ]; then
-            echo "Missing or empty secret after cleanup: AZURE_STATIC_WEB_APPS_API_TOKEN"
+            echo "Missing or empty secret after cleanup: WEB_APPS_API_TOKEN"
             exit 1
           fi
 
@@ -41,11 +41,11 @@ jobs:
           echo "Ref: $GITHUB_REF"
 
           if [ -z "$SWA_TOKEN" ]; then
-            echo "Missing secret: AZURE_STATIC_WEB_APPS_API_TOKEN"
+            echo "Missing secret: WEB_APPS_API_TOKEN"
             exit 1
           fi
 
-          echo "AZURE_STATIC_WEB_APPS_API_TOKEN is present (length: ${#SWA_TOKEN})"
+          echo "WEB_APPS_API_TOKEN is present (length: ${#SWA_TOKEN})"
 
           TOKEN_FINGERPRINT=$(printf '%s' "$SWA_TOKEN" | sha256sum | cut -c1-12)
           echo "SWA token fingerprint (sha256, first 12): $TOKEN_FINGERPRINT"
@@ -78,12 +78,12 @@ jobs:
       - name: Prepare SWA token
         id: prepare_swa_token
         env:
-          RAW_SWA_TOKEN: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+          RAW_SWA_TOKEN: ${{ secrets.WEB_APPS_API_TOKEN }}
         run: |
           CLEAN_SWA_TOKEN=$(printf '%s' "$RAW_SWA_TOKEN" | tr -d '\r\n' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
 
           if [ -z "$CLEAN_SWA_TOKEN" ]; then
-            echo "Missing or empty secret after cleanup: AZURE_STATIC_WEB_APPS_API_TOKEN"
+            echo "Missing or empty secret after cleanup: WEB_APPS_API_TOKEN"
             exit 1
           fi
 
