@@ -17,9 +17,24 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Prepare SWA token
+        id: prepare_swa_token
+        env:
+          RAW_SWA_TOKEN: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+        run: |
+          # Remove hidden newline characters and trim surrounding spaces.
+          CLEAN_SWA_TOKEN=$(printf '%s' "$RAW_SWA_TOKEN" | tr -d '\r\n' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
+
+          if [ -z "$CLEAN_SWA_TOKEN" ]; then
+            echo "Missing or empty secret after cleanup: AZURE_STATIC_WEB_APPS_API_TOKEN"
+            exit 1
+          fi
+
+          echo "swa_token=$CLEAN_SWA_TOKEN" >> "$GITHUB_OUTPUT"
+
       - name: Validate required secrets
         env:
-          SWA_TOKEN: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+          SWA_TOKEN: ${{ steps.prepare_swa_token.outputs.swa_token }}
           NEXT_PUBLIC_BACKEND_URL: ${{ secrets.NEXT_PUBLIC_BACKEND_URL || vars.NEXT_PUBLIC_BACKEND_URL }}
         run: |
           echo "Repository: $GITHUB_REPOSITORY"
@@ -47,7 +62,7 @@ jobs:
           NEXT_PUBLIC_BACKEND_URL: ${{ secrets.NEXT_PUBLIC_BACKEND_URL || vars.NEXT_PUBLIC_BACKEND_URL }}
         uses: Azure/static-web-apps-deploy@v1
         with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+          azure_static_web_apps_api_token: ${{ steps.prepare_swa_token.outputs.swa_token }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: upload
           app_location: "frontend"
@@ -60,8 +75,22 @@ jobs:
     runs-on: ubuntu-latest
     name: Close Pull Request Job
     steps:
+      - name: Prepare SWA token
+        id: prepare_swa_token
+        env:
+          RAW_SWA_TOKEN: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+        run: |
+          CLEAN_SWA_TOKEN=$(printf '%s' "$RAW_SWA_TOKEN" | tr -d '\r\n' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
+
+          if [ -z "$CLEAN_SWA_TOKEN" ]; then
+            echo "Missing or empty secret after cleanup: AZURE_STATIC_WEB_APPS_API_TOKEN"
+            exit 1
+          fi
+
+          echo "swa_token=$CLEAN_SWA_TOKEN" >> "$GITHUB_OUTPUT"
+
       - name: Close Pull Request
         uses: Azure/static-web-apps-deploy@v1
         with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+          azure_static_web_apps_api_token: ${{ steps.prepare_swa_token.outputs.swa_token }}
           action: close
