@@ -169,7 +169,7 @@ export async function fetchEspnRoster(teamId: string): Promise<EspnPlayer[] | nu
   if (!info) return null;
 
   try {
-    const res = await fetch(getEspnUrl(info.league, info.espnId), { next: { revalidate: 3600 } });
+    const res = await fetch(getEspnUrl(info.league, info.espnId));
     if (!res.ok) return null;
     const data = await res.json();
     if (!data.athletes || !Array.isArray(data.athletes) || data.athletes.length === 0) return null;
