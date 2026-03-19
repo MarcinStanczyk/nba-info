@@ -53,7 +53,7 @@ jobs:
     permissions:
       contents: read
     env:
-      AZURE_BACKEND_WEBAPP_NAME: ${{ vars.AZURE_BACKEND_WEBAPP_NAME || 'nba-info-gkebftgnhhcthxe7' }}
+      AZURE_BACKEND_WEBAPP_NAME: ${{ vars.AZURE_BACKEND_WEBAPP_NAME || 'nba-info' }}
 
     steps:
       - name: Download backend artifact
