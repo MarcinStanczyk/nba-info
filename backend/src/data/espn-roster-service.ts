@@ -4,6 +4,9 @@
  * No API key needed -- same data as nba.com/espn.com.
  */
 
+import { nbaRosters } from "./nba-rosters";
+import { nbaTeams } from "./nba-teams";
+
 export interface EspnPlayer {
   id: string;
   name: string;
@@ -160,22 +163,40 @@ function parseAthletes(athletes: EspnAthlete[]): EspnPlayer[] {
     });
 }
 
+function getStaticNbaRosterFallback(teamId: string): EspnPlayer[] | null {
+  const team = nbaTeams.find((t) => t.id === teamId);
+  if (!team) return null;
+
+  const rosterKey = team.shortName.toLowerCase();
+  const fallback = nbaRosters[rosterKey];
+  if (!fallback || !Array.isArray(fallback.players) || fallback.players.length === 0) {
+    return null;
+  }
+
+  return fallback.players.map((player) => ({
+    ...player,
+    experience: 0,
+  }));
+}
+
 /**
  * Fetch live roster for any team (NBA/WNBA/NCAA) from ESPN API.
  * Returns null if the team ID isn't mapped or if the fetch fails.
  */
 export async function fetchEspnRoster(teamId: string): Promise<EspnPlayer[] | null> {
   const info = getLeagueAndEspnId(teamId);
-  if (!info) return null;
+  if (!info) return getStaticNbaRosterFallback(teamId);
 
   try {
     const res = await fetch(getEspnUrl(info.league, info.espnId));
-    if (!res.ok) return null;
+    if (!res.ok) return getStaticNbaRosterFallback(teamId);
     const data = await res.json();
-    if (!data.athletes || !Array.isArray(data.athletes) || data.athletes.length === 0) return null;
+    if (!data.athletes || !Array.isArray(data.athletes) || data.athletes.length === 0) {
+      return getStaticNbaRosterFallback(teamId);
+    }
     return parseAthletes(data.athletes);
   } catch {
-    return null;
+    return getStaticNbaRosterFallback(teamId);
   }
 }
 
