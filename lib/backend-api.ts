@@ -1,8 +1,23 @@
-const serverBackendUrl =
-  process.env.BACKEND_URL ?? process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://backend:4000";
+const DEFAULT_PRODUCTION_BACKEND_URL =
+  "https://nba-info-gkebftgnhhcthxe7.polandcentral-01.azurewebsites.net";
 
-const clientBackendUrl =
-  process.env.NEXT_PUBLIC_BACKEND_URL ?? (process.env.NODE_ENV === "development" ? "http://localhost:4000" : "");
+function normalizeBaseUrl(url: string): string {
+  return url.endsWith("/") ? url.slice(0, -1) : url;
+}
+
+const defaultServerBackendUrl =
+  process.env.NODE_ENV === "development" ? "http://backend:4000" : DEFAULT_PRODUCTION_BACKEND_URL;
+
+const defaultClientBackendUrl =
+  process.env.NODE_ENV === "development" ? "http://localhost:4000" : DEFAULT_PRODUCTION_BACKEND_URL;
+
+const serverBackendUrl = normalizeBaseUrl(
+  process.env.BACKEND_URL ?? process.env.NEXT_PUBLIC_BACKEND_URL ?? defaultServerBackendUrl,
+);
+
+const clientBackendUrl = normalizeBaseUrl(
+  process.env.NEXT_PUBLIC_BACKEND_URL ?? defaultClientBackendUrl,
+);
 
 export function getBackendBaseUrl(): string {
   return typeof window === "undefined" ? serverBackendUrl : clientBackendUrl;
@@ -10,9 +25,6 @@ export function getBackendBaseUrl(): string {
 
 export async function backendFetch<T>(path: string, init?: RequestInit): Promise<T> {
   const baseUrl = getBackendBaseUrl();
-  if (!baseUrl) {
-    throw new Error("NEXT_PUBLIC_BACKEND_URL is not configured for production build.");
-  }
 
   const normalizedPath = path.startsWith("/") ? path : `/${path}`;
   const response = await fetch(`${baseUrl}${normalizedPath}`, {
