@@ -37,6 +37,7 @@ jobs:
         run: |
           mkdir -p backend-deploy
           cp -R backend/dist backend-deploy/dist
+          cp -R backend/data backend-deploy/data
           cp backend/package.json backend-deploy/package.json
           cp backend/package-lock.json backend-deploy/package-lock.json
           cp -R backend/node_modules backend-deploy/node_modules
