@@ -8,8 +8,10 @@ const common_1 = require("@nestjs/common");
 const promises_1 = require("node:fs/promises");
 const node_path_1 = __importDefault(require("node:path"));
 class ChampionPredictorService {
-    repoRoot = node_path_1.default.resolve(__dirname, "../../..");
-    predictionFilePath = node_path_1.default.join(this.repoRoot, "data", "champion-prediction.json");
+    // Works in both:
+    // - local dev/build: backend/src|dist/bootstrap -> ../../data
+    // - Azure App Service: /home/site/wwwroot/dist/bootstrap -> /home/site/wwwroot/data
+    predictionFilePath = node_path_1.default.resolve(__dirname, "../../data/champion-prediction.json");
     async calculateChampion() {
         try {
             const raw = await (0, promises_1.readFile)(this.predictionFilePath, "utf8");

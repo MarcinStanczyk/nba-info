@@ -16,8 +16,10 @@ export interface ChampionPredictionResponse {
 }
 
 export class ChampionPredictorService {
-  private readonly repoRoot = path.resolve(__dirname, "../../..");
-  private readonly predictionFilePath = path.join(this.repoRoot, "data", "champion-prediction.json");
+  // Works in both:
+  // - local dev/build: backend/src|dist/bootstrap -> ../../data
+  // - Azure App Service: /home/site/wwwroot/dist/bootstrap -> /home/site/wwwroot/data
+  private readonly predictionFilePath = path.resolve(__dirname, "../../data/champion-prediction.json");
 
   async calculateChampion(): Promise<ChampionPredictionResponse> {
     try {
