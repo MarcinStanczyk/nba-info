@@ -78,6 +78,23 @@ Wymagane ustawienia App Service:
 - `GET /api/standings/state-champions`
 - `GET /api/standings/:conference`
 - `GET /api/states`
+- `GET /api/champion/calculate` (zwraca statyczny plik `backend/data/champion-prediction.json`)
+
+## Aktualizacja predykcji AI (lokalnie, offline)
+
+Model AI nie jest uruchamiany na backendzie. Wynik predykcji jest zapisywany do statycznego pliku JSON,
+który backend tylko odczytuje.
+
+Aktualizacja pliku:
+
+```bash
+cd AI
+./venv/Scripts/python.exe src/update_backend_prediction.py
+```
+
+Po uruchomieniu commitujesz zmieniony plik:
+
+- `backend/data/champion-prediction.json`
 
 ## Struktura NestJS
 

@@ -21,6 +21,7 @@ const nba_standings_1 = require("../data/nba-standings");
 const nba_dance_teams_1 = require("../data/nba-dance-teams");
 const espn_roster_service_1 = require("../data/espn-roster-service");
 const standings_1 = require("../standings");
+const champion_predictor_service_1 = require("./champion-predictor.service");
 let BootstrapController = class BootstrapController {
     health() {
         return { status: "ok" };
@@ -45,6 +46,9 @@ let BootstrapController = class BootstrapController {
     async roster(teamId) {
         return (0, espn_roster_service_1.fetchEspnRoster)(teamId);
     }
+    async calculateChampion() {
+        return champion_predictor_service_1.championPredictorService.calculateChampion();
+    }
 };
 exports.BootstrapController = BootstrapController;
 __decorate([
@@ -66,6 +70,12 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], BootstrapController.prototype, "roster", null);
+__decorate([
+    (0, common_1.Get)("api/champion/calculate"),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], BootstrapController.prototype, "calculateChampion", null);
 exports.BootstrapController = BootstrapController = __decorate([
     (0, common_1.Controller)()
 ], BootstrapController);

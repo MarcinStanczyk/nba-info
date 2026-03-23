@@ -11,6 +11,7 @@ import { eastStandings, westStandings, nbaChampion } from "../data/nba-standings
 import { nbaDanceTeams } from "../data/nba-dance-teams";
 import { fetchEspnRoster } from "../data/espn-roster-service";
 import { standingsController } from "../standings";
+import { championPredictorService } from "./champion-predictor.service";
 
 @Controller()
 export class BootstrapController {
@@ -41,5 +42,10 @@ export class BootstrapController {
   @Get("api/roster/:teamId")
   async roster(@Param("teamId") teamId: string) {
     return fetchEspnRoster(teamId);
+  }
+
+  @Get("api/champion/calculate")
+  async calculateChampion() {
+    return championPredictorService.calculateChampion();
   }
 }

@@ -1,0 +1,84 @@
+{
+  "teamName": "Thunder",
+  "teamCode": "OKC",
+  "probability": 0.238,
+  "reason": "Model Monte Carlo (500 symulacji) wskazuje Thunder jako faworyta z prawdopodobienstwem 23.8% na podstawie aktualnej formy i matchupow.",
+  "generatedAt": "2026-03-23T16:49:33.423783+00:00",
+  "topProbabilities": [
+    {
+      "teamName": "Thunder",
+      "teamCode": "OKC",
+      "probability": 0.238
+    },
+    {
+      "teamName": "Pistons",
+      "teamCode": "DET",
+      "probability": 0.2
+    },
+    {
+      "teamName": "Celtics",
+      "teamCode": "BOS",
+      "probability": 0.188
+    },
+    {
+      "teamName": "Cavaliers",
+      "teamCode": "CLE",
+      "probability": 0.09
+    },
+    {
+      "teamName": "Spurs",
+      "teamCode": "SAS",
+      "probability": 0.066
+    },
+    {
+      "teamName": "Timberwolves",
+      "teamCode": "MIN",
+      "probability": 0.062
+    },
+    {
+      "teamName": "Knicks",
+      "teamCode": "NYK",
+      "probability": 0.056
+    },
+    {
+      "teamName": "Rockets",
+      "teamCode": "HOU",
+      "probability": 0.034
+    },
+    {
+      "teamName": "Nuggets",
+      "teamCode": "DEN",
+      "probability": 0.016
+    },
+    {
+      "teamName": "Clippers",
+      "teamCode": "LAC",
+      "probability": 0.014
+    },
+    {
+      "teamName": "Raptors",
+      "teamCode": "TOR",
+      "probability": 0.01
+    },
+    {
+      "teamName": "Lakers",
+      "teamCode": "LAL",
+      "probability": 0.01
+    },
+    {
+      "teamName": "Hawks",
+      "teamCode": "ATL",
+      "probability": 0.008
+    },
+    {
+      "teamName": "Hornets",
+      "teamCode": "CHA",
+      "probability": 0.006
+    },
+    {
+      "teamName": "Suns",
+      "teamCode": "PHX",
+      "probability": 0.002
+    }
+  ]
+}

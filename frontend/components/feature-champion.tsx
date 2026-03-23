@@ -5,12 +5,19 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Spinner } from "@/components/ui/spinner";
+import { backendFetch } from "@/lib/backend-api";
 
 interface ChampionPrediction {
   teamName: string;
   teamCode: string;
   probability: number;
   reason: string;
+  generatedAt?: string;
+  topProbabilities?: Array<{
+    teamName: string;
+    teamCode: string;
+    probability: number;
+  }>;
 }
 
 export function FeatureChampionComponent() {
@@ -24,20 +31,10 @@ export function FeatureChampionComponent() {
     setPrediction(null);
 
     try {
-      // Simulate API call - in the future this can call a real backend endpoint
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-
-      // Mock prediction data
-      const mockPrediction: ChampionPrediction = {
-        teamName: "Boston Celtics",
-        teamCode: "BOS",
-        probability: 0.85,
-        reason:
-          "Strongest roster, excellent defense, and proven chemistry from previous season",
-      };
-
-      setPrediction(mockPrediction);
+      const data = await backendFetch<ChampionPrediction>("/api/champion/calculate");
+      setPrediction(data);
     } catch (err) {
+      console.error("Champion prediction request failed", err);
       setError("Failed to calculate champion prediction. Please try again.");
     } finally {
       setIsCalculating(false);
@@ -114,6 +111,39 @@ export function FeatureChampionComponent() {
               <h4 className="text-sm font-semibold text-muted-foreground mb-2">Analysis</h4>
               <p className="text-sm text-foreground">{prediction.reason}</p>
             </div>
+
+            {prediction.topProbabilities && prediction.topProbabilities.length > 0 && (
+              <div>
+                <h4 className="text-sm font-semibold text-muted-foreground mb-2">Top 5 Teams</h4>
+                <div className="space-y-2">
+                  {prediction.topProbabilities.slice(0, 5).map((team, index) => (
+                    <div
+                      key={`${team.teamCode}-${team.teamName}`}
+                      className="rounded-md border border-border/70 bg-background/40 p-2"
+                    >
+                      <div className="mb-1 flex items-center justify-between text-sm">
+                        <span className="font-medium">
+                          {index + 1}. {team.teamName}
+                        </span>
+                        <Badge variant="secondary">{(team.probability * 100).toFixed(1)}%</Badge>
+                      </div>
+                      <div className="h-2 overflow-hidden rounded-full bg-secondary">
+                        <div
+                          className="h-full bg-nba-orange transition-all duration-500"
+                          style={{ width: `${team.probability * 100}%` }}
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {prediction.generatedAt && (
+              <p className="text-xs text-muted-foreground">
+                Generated at: {new Date(prediction.generatedAt).toLocaleString()}
+              </p>
+            )}
 
             <Button
               onClick={() => setPrediction(null)}
